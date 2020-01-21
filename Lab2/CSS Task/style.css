@@ -1,0 +1,13 @@
+h3{
+    margin-left: 45%;
+}
+
+.tableClass {
+    position: relative;
+    left : 20%;
+}
+
+.bg{
+    background-color: aqua;
+    width: 100%;
+}
