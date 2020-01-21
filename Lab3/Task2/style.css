@@ -1,0 +1,12 @@
+.text{
+    display:none;
+}
+
+.toggleVisability {
+    display:block;
+}
+
+
+input {
+    margin-bottom: 10px;
+}
