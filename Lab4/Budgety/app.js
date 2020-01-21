@@ -28,19 +28,14 @@ var data = {
 //Add event listener
 document.querySelector('.add__btn').addEventListener('click', add);
 
-document.addEventListener('click', foo2);
+document.addEventListener('click', deleteItem);
 
 function foo(e) {
     if (e.keyCode == 13 || e.which == 13) {
         add();
     }
 }
-function foo2(e) {
-    console.log(e.target.parentNode.parentNode.parentNode.parentNode);
-    if (e.keyCode == 13 || e.which == 13) {
-        add();
-    }
-}
+
 
 function add() {
     //Get Data from Inputes
@@ -102,4 +97,11 @@ function add() {
         document.querySelector('.add__description').focus();
     }
 
+}
+
+function deleteItem(e) {
+    //console.log(e.target.parentNode.parentNode.parentNode.parentNode)
+    if (e.target.className == 'ion-ios-close-outline') {
+        e.target.parentNode.parentNode.parentNode.parentNode.remove()
+    }
 }
