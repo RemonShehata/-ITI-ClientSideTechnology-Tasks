@@ -27,10 +27,10 @@ var data = {
 
 //Add event listener
 document.querySelector('.add__btn').addEventListener('click', add);
-
+document.addEventListener('click', addItem);
 document.addEventListener('click', deleteItem);
 
-function foo(e) {
+function addItem(e) {
     if (e.keyCode == 13 || e.which == 13) {
         add();
     }
@@ -104,4 +104,40 @@ function deleteItem(e) {
     if (e.target.className == 'ion-ios-close-outline') {
         e.target.parentNode.parentNode.parentNode.parentNode.remove()
     }
+
+    //Check for delete button
+    if (e.target.className == 'ion-ios-close-outline') {
+        //Check for list type
+        if (e.target.parentNode.parentNode.parentNode.parentNode.parentNode.className == "income__list") {
+            updateList('inc', e);
+        }
+        else {
+            updateList('exp', e);
+        }
+    }
 }
+
+function updateList(type, e) {
+    //Get item ID
+    var id = e.target.parentNode.parentNode.parentNode.parentNode.id;
+    if (type == 'inc') {
+        id = id.substring(7);
+    }
+    else {
+        id = id.substring(8);
+    }
+    //get item 
+    for (i = 0; i < data.lists[type].length; i++) {
+        if (data.lists[type][i].ID == id) {
+            data.totals[type] -= data.lists[type][i].value;
+            var item = data.lists[type].splice(i, 1);
+        }
+    }
+    //update Budget
+    data.totals.budget = data.totals.inc - data.totals.exp;
+    //Update UI
+    e.target.parentNode.parentNode.parentNode.parentNode.remove();
+    document.querySelector('.budget__value').textContent = data.totals.budget;
+    document.querySelector('.budget__income--value').textContent = data.totals.inc;
+    document.querySelector('.budget__expenses--value').textContent = data.totals.exp;
+} x
